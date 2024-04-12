@@ -1,0 +1,31 @@
+﻿@model DWP2.Models.Countries
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Countries</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.COUNTRY_NAME)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.COUNTRY_NAME)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Regions)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Regions.REGION_NAME)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.COUNTRY_ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

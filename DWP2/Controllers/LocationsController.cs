@@ -22,7 +22,7 @@ namespace DWP2.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.locations.ToListAsync());
+            return View(await _context.locations.Include(l=>l.Countries).ToListAsync());
         }
 
         // GET: Locations/Details/5

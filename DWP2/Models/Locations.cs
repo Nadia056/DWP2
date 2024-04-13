@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.Metrics;
 using System.Text.Json.Serialization;
 namespace DWP2.Models
 {
@@ -8,24 +9,25 @@ namespace DWP2.Models
         [Key]
         [JsonPropertyName("location_id")]
         public int LOCATION_ID { get; set; }
-        
+
         [JsonPropertyName("address")]
-        public required string ADDRESS { get; set; }
-        
+        public string ADDRESS { get; set; }
+
         [JsonPropertyName("postal_code")]
-        public int? POSTAL_CODE { get; set; }
-        
+        public string? POSTAL_CODE { get; set; }
+
         [JsonPropertyName("city")]
-        public  required string CITY { get; set; }
-        
+        public string? CITY { get; set; }
+
         [JsonPropertyName("state")]
         public string? STATE { get; set; }
 
-        [ForeignKey("countries")]
+        [ForeignKey("Countries")]
         [JsonPropertyName("country_id")]
-        public int COUNTRY_ID { get; set; }
-
+        public string? COUNTRY_ID { get; set; }
 
         public Countries? Countries { get; set; }
     }
+
 }
+

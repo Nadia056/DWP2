@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DWP2.Data;
 using DWP2.Models;
+using System.Drawing;
 
 namespace DWP2.Controllers
 {
@@ -42,14 +43,13 @@ namespace DWP2.Controllers
 
             return View(locations);
         }
-
-        // GET: Locations/Create
         public IActionResult Create()
         {
+            ViewData["COUNTRY_ID"] = new SelectList(_context.countries, "COUNTRY_ID", "COUNTRY_NAME");
             return View();
         }
 
-        // POST: Locations/Create
+        // POST: Countries/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -62,9 +62,14 @@ namespace DWP2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["REGION_ID"] = new SelectList(_context.regions, "COUNTRY_ID", "COUNTRY_NAME", locations.COUNTRY_ID);
             return View(locations);
         }
-
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        
         // GET: Locations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

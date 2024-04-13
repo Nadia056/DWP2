@@ -34,9 +34,8 @@
                 <span asp-validation-for="STATE" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="COUNTRY_ID" class="control-label"></label>
-                <input asp-for="COUNTRY_ID" class="form-control" />
-                <span asp-validation-for="COUNTRY_ID" class="text-danger"></span>
+                <label asp-for="COUNTRY_ID" class="control-label">REGION NAME</label>
+                <select asp-for="COUNTRY_ID" class="form-control" asp-items="ViewBag.COUNTRY_ID"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

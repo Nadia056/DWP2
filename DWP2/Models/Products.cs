@@ -13,8 +13,7 @@ namespace DWP2.Models
         public decimal LIST_PRICE { get; set; }
         [ForeignKey("Product_Categories")]
         public int CATEGORY_ID { get; set; }
-
-        //public Product_Categories? Product_Categories { get; set; }
+        public Product_Categories? Product_Categories { get; set; }
 
     }
 }

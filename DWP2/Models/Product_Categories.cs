@@ -11,7 +11,5 @@ namespace DWP2.Models
         [JsonPropertyName("category_name")]
         public string? CATEGORY_NAME { get; set; }
 
-        [JsonPropertyName("product_count")]
-        public int Product_Count { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using DWP2.Models;
 namespace DWP2.Controllers
 {
     public class LocationsController : Controller
-    {
+    { 
         private readonly ApplicationDbContext _context;
 
         public LocationsController(ApplicationDbContext context)

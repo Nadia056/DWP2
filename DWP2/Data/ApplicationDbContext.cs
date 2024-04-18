@@ -35,5 +35,8 @@ namespace DWP2.Data
         {
             throw new Exception();
         }
+        public DbSet<DWP2.Models.Contacts> Contacts { get; set; } = default!;
+        public DbSet<DWP2.Models.Products> Products { get; set; } = default!;
+        public DbSet<DWP2.Models.Product_Categories> Product_Categories { get; set; } = default!;
     }
 }

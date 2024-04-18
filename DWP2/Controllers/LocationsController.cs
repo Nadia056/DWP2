@@ -22,7 +22,8 @@ namespace DWP2.Controllers
         // GET: Locations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.locations.Include(l=>l.Countries).ToListAsync());
+            var locations = await _context.locations.Include(l => l.Countries).ToListAsync();
+            return View(locations);
         }
 
         // GET: Locations/Details/5
@@ -33,38 +34,41 @@ namespace DWP2.Controllers
                 return NotFound();
             }
 
-            var locations = await _context.locations
+            var location = await _context.locations
+                .Include(l => l.Countries)
                 .FirstOrDefaultAsync(m => m.LOCATION_ID == id);
-            if (locations == null)
+            if (location == null)
             {
                 return NotFound();
             }
 
-            return View(locations);
+            return View(location);
         }
 
         // GET: Locations/Create
         public IActionResult Create()
         {
+            ViewData["COUNTRY_ID"] = new SelectList(_context.countries, "COUNTRY_ID", "COUNTRY_NAME");
             return View();
         }
 
         // POST: Locations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LOCATION_ID,ADDRESS,POSTAL_CODE,CITY,STATE,COUNTRY_ID")] Locations locations)
+        public async Task<IActionResult> Create([Bind("LOCATION_ID,ADDRESS,POSTAL_CODE,CITY,STATE,COUNTRY_ID")] Locations location)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(locations);
+                _context.Add(location);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(locations);
+
+            ViewData["COUNTRY_ID"] = new SelectList(_context.countries, "COUNTRY_ID", "COUNTRY_NAME", location.COUNTRY_ID);
+            return View(location);
         }
 
+        // GET: Locations/Edit/5
         // GET: Locations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -73,22 +77,25 @@ namespace DWP2.Controllers
                 return NotFound();
             }
 
-            var locations = await _context.locations.FindAsync(id);
-            if (locations == null)
+            var location = await _context.locations.FindAsync(id);
+            if (location == null)
             {
                 return NotFound();
             }
-            return View(locations);
+
+            // Cargar los países y pasarlos a ViewBag
+            ViewData["COUNTRY_ID"] = new SelectList(_context.countries, "COUNTRY_ID", "COUNTRY_NAME", location.COUNTRY_ID);
+
+            return View(location);
         }
 
+
         // POST: Locations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LOCATION_ID,ADDRESS,POSTAL_CODE,CITY,STATE,COUNTRY_ID")] Locations locations)
+        public async Task<IActionResult> Edit(int id, [Bind("LOCATION_ID,ADDRESS,POSTAL_CODE,CITY,STATE,COUNTRY_ID")] Locations location)
         {
-            if (id != locations.LOCATION_ID)
+            if (id != location.LOCATION_ID)
             {
                 return NotFound();
             }
@@ -97,12 +104,12 @@ namespace DWP2.Controllers
             {
                 try
                 {
-                    _context.Update(locations);
+                    _context.Update(location);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LocationsExists(locations.LOCATION_ID))
+                    if (!LocationExists(location.LOCATION_ID))
                     {
                         return NotFound();
                     }
@@ -113,7 +120,8 @@ namespace DWP2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(locations);
+            ViewData["COUNTRY_ID"] = new SelectList(_context.countries, "COUNTRY_ID", "COUNTRY_NAME", location.COUNTRY_ID);
+            return View(location);
         }
 
         // GET: Locations/Delete/5
@@ -124,14 +132,15 @@ namespace DWP2.Controllers
                 return NotFound();
             }
 
-            var locations = await _context.locations
+            var location = await _context.locations
+                .Include(l => l.Countries)
                 .FirstOrDefaultAsync(m => m.LOCATION_ID == id);
-            if (locations == null)
+            if (location == null)
             {
                 return NotFound();
             }
 
-            return View(locations);
+            return View(location);
         }
 
         // POST: Locations/Delete/5
@@ -139,17 +148,17 @@ namespace DWP2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var locations = await _context.locations.FindAsync(id);
-            if (locations != null)
+            var location = await _context.locations.FindAsync(id);
+            if (location != null)
             {
-                _context.locations.Remove(locations);
+                _context.locations.Remove(location);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LocationsExists(int id)
+        private bool LocationExists(int id)
         {
             return _context.locations.Any(e => e.LOCATION_ID == id);
         }

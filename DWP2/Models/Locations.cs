@@ -11,9 +11,8 @@ namespace DWP2.Models
         public int LOCATION_ID { get; set; }
 
         [JsonPropertyName("address")]
-        public string ADDRESS { get; set; }
+        public required string ADDRESS { get; set; }
 
-        [JsonPropertyName("postal_code")]
         public string? POSTAL_CODE { get; set; }
 
         [JsonPropertyName("city")]

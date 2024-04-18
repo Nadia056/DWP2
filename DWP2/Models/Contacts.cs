@@ -19,13 +19,12 @@ namespace DWP2.Models
         [JsonPropertyName("email")]
         public string? EMAIL { get; set; }
 
-        [JsonPropertyName("phone")]
+        [JsonPropertyName("phone")] 
         public string? PHONE { get; set; }
 
         [ForeignKey("Customers")]
         [JsonPropertyName("customer_id")]
         public int CUSTOMER_ID { get; set; }
-
         public Customers? Customers { get; set; }
 
     }

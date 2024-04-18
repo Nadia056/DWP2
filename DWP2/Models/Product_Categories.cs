@@ -8,7 +8,7 @@ namespace DWP2.Models
         [Key]
         [JsonPropertyName("category_id")]
         public int CATEGORY_ID { get; set; }
-        [JsonPropertyName("category_name")]
+        [JsonPropertyName("category_name")] 
         public string? CATEGORY_NAME { get; set; }
 
     }

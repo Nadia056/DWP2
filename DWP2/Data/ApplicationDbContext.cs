@@ -42,5 +42,15 @@ namespace DWP2.Data
         public DbSet<DWP2.Models.Product_Categories> Product_Categories { get; set; } = default!;
         public DbSet<DWP2.Models.Order_Items> Order_Items { get; set; } = default!;
         public DbSet<DWP2.Models.Warehouses> Warehouses { get; set; } = default!;
+
+        public DbSet<Inventories> Inventories { get; set; }
+        // Agrega tus DbSet para Products, Warehouses y otras entidades aquí
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Inventories>()
+                .HasKey(i => new { i.PRODUCT_ID, i.WAREHOUSE_ID });
+            // Agrega cualquier otra configuración de entidad aquí
+        }
     }
 }

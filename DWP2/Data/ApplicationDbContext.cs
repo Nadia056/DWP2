@@ -41,5 +41,6 @@ namespace DWP2.Data
         public DbSet<DWP2.Models.Products> Products { get; set; } = default!;
         public DbSet<DWP2.Models.Product_Categories> Product_Categories { get; set; } = default!;
         public DbSet<DWP2.Models.Order_Items> Order_Items { get; set; } = default!;
+        public DbSet<DWP2.Models.Warehouses> Warehouses { get; set; } = default!;
     }
 }

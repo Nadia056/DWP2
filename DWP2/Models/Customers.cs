@@ -9,7 +9,7 @@ namespace DWP2.Models
         [Key]
         [JsonPropertyName("customer_id")]
         public int CUSTOMER_ID { get; set; }
-        [JsonPropertyName("name")]
+        [JsonPropertyName("name")] 
         public string? NAME { get; set; }
         [JsonPropertyName("address")]
         public string? ADDRESS { get; set; }

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DWP2.Models.Order_Items>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ITEM_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QUANTITY)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UNIT_PRICE)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ITEM_ID)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Products.PRODUCT_NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QUANTITY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UNIT_PRICE)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ORDER_ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ORDER_ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ORDER_ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
